@@ -1,30 +1,30 @@
-const Shop = require("../model/shop");
+const lawShop = require("../model/lawshop");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const express = require("express");
-const { isSeller, isAuthenticated, isAdmin } = require("../middleware/auth");
+const { isLawyer, isAuthenticated, isAdmin } = require("../middleware/auth");
 const Withdraw = require("../model/withdraw");
 const sendMail = require("../utils/sendMail");
 const router = express.Router();
 
-// create withdraw request --- only for seller
+// create withdraw request --- only for lawyer
 router.post(
   "/create-withdraw-request",
-  isSeller,
+  isLawyer,
   catchAsyncErrors(async (req, res, next) => {
     try {
       const { amount } = req.body;
 
       const data = {
-        seller: req.seller,
+        lawyer: req.lawyer,
         amount,
       };
 
       try {
         await sendMail({
-          email: req.seller.email,
+          email: req.lawyer.email,
           subject: "Withdraw Request",
-          message: `Hello ${req.seller.name}, Your withdraw request of ${amount}$ is processing. It will take 3days to 7days to processing! `,
+          message: `Hello ${req.lawyer.name}, Your withdraw request of ${amount}$ is processing. It will take 3days to 7days to processing! `,
         });
         res.status(201).json({
           success: true,
@@ -35,11 +35,11 @@ router.post(
 
       const withdraw = await Withdraw.create(data);
 
-      const shop = await Shop.findById(req.seller._id);
+      const lawshop = await lawShop.findById(req.lawyer._id);
 
-      shop.availableBalance = shop.availableBalance - amount;
+      lawshop.availableBalance = lawshop.availableBalance - amount;
 
-      await shop.save();
+      await lawshop.save();
 
       res.status(201).json({
         success: true,
@@ -78,7 +78,7 @@ router.put(
   isAdmin("Admin"),
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const { sellerId } = req.body;
+      const { lawyerId } = req.body;
 
       const withdraw = await Withdraw.findByIdAndUpdate(
         req.params.id,
@@ -89,7 +89,7 @@ router.put(
         { new: true }
       );
 
-      const seller = await Shop.findById(sellerId);
+      const lawyer = await lawShop.findById(lawyerId);
 
       const transection = {
         _id: withdraw._id,
@@ -98,15 +98,15 @@ router.put(
         status: withdraw.status,
       };
 
-      seller.transections = [...seller.transections, transection];
+      lawyer.transections = [...lawyer.transections, transection];
 
-      await seller.save();
+      await lawyer.save();
 
       try {
         await sendMail({
-          email: seller.email,
+          email: lawyer.email,
           subject: "Payment confirmation",
-          message: `Hello ${seller.name}, Your withdraw request of ${withdraw.amount}$ is on the way. Delivery time depends on your bank's rules it usually takes 3days to 7days.`,
+          message: `Hello ${lawyer.name}, Your withdraw request of ${withdraw.amount}$ is on the way. Delivery time depends on your bank's rules it usually takes 3days to 7days.`,
         });
       } catch (error) {
         return next(new ErrorHandler(error.message, 500));

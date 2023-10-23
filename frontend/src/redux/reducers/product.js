@@ -19,20 +19,20 @@ export const productReducer = createReducer(initialState, {
     state.success = false;
   },
 
-  // get all products of shop
-  getAllProductsShopRequest: (state) => {
+  // get all products of lawshop
+  getAllProductslawShopRequest: (state) => {
     state.isLoading = true;
   },
-  getAllProductsShopSuccess: (state, action) => {
+  getAllProductslawShopSuccess: (state, action) => {
     state.isLoading = false;
     state.products = action.payload;
   },
-  getAllProductsShopFailed: (state, action) => {
+  getAllProductslawShopFailed: (state, action) => {
     state.isLoading = false;
     state.error = action.payload;
   },
 
-  // delete product of a shop
+  // delete product of a lawshop
   deleteProductRequest: (state) => {
     state.isLoading = true;
   },

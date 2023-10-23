@@ -2,7 +2,7 @@ const Conversation = require("../model/conversation");
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const express = require("express");
-const { isSeller, isAuthenticated } = require("../middleware/auth");
+const { isLawyer, isAuthenticated } = require("../middleware/auth");
 const router = express.Router();
 
 // create a new conversation
@@ -10,7 +10,7 @@ router.post(
   "/create-new-conversation",
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const { groupTitle, userId, sellerId } = req.body;
+      const { groupTitle, userId, lawyerId } = req.body;
 
       const isConversationExist = await Conversation.findOne({ groupTitle });
 
@@ -22,7 +22,7 @@ router.post(
         });
       } else {
         const conversation = await Conversation.create({
-          members: [userId, sellerId],
+          members: [userId, lawyerId],
           groupTitle: groupTitle,
         });
 
@@ -37,10 +37,10 @@ router.post(
   })
 );
 
-// get seller conversations
+// get lawyer conversations
 router.get(
-  "/get-all-conversation-seller/:id",
-  isSeller,
+  "/get-all-conversation-lawyer/:id",
+  isLawyer,
   catchAsyncErrors(async (req, res, next) => {
     try {
       const conversations = await Conversation.find({

@@ -31,13 +31,13 @@ const AllWithdraw = () => {
     { field: "id", headerName: "Withdraw Id", minWidth: 150, flex: 0.7 },
     {
       field: "name",
-      headerName: "Shop Name",
+      headerName: "lawShop Name",
       minWidth: 180,
       flex: 1.4,
     },
     {
-      field: "shopId",
-      headerName: "Shop Id",
+      field: "lawshopId",
+      headerName: "lawShop Id",
       minWidth: 180,
       flex: 1.4,
     },
@@ -83,7 +83,7 @@ const AllWithdraw = () => {
   const handleSubmit = async () => {
     await axios
       .put(`${server}/withdraw/update-withdraw-request/${withdrawData.id}`,{
-        sellerId: withdrawData.shopId,
+        lawyerId: withdrawData.lawshopId,
       },{withCredentials: true})
       .then((res) => {
         toast.success("Withdraw request updated successfully!");
@@ -98,8 +98,8 @@ const AllWithdraw = () => {
     data.forEach((item) => {
       row.push({
         id: item._id,
-        shopId: item.seller._id,
-        name: item.seller.name,
+        lawshopId: item.lawyer._id,
+        name: item.lawyer.name,
         amount: "US$ " + item.amount,
         status: item.status,
         createdAt: item.createdAt.slice(0, 10),

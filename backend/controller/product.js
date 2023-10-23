@@ -1,10 +1,10 @@
 const express = require("express");
-const { isSeller, isAuthenticated, isAdmin } = require("../middleware/auth");
+const { isLawyer, isAuthenticated, isAdmin } = require("../middleware/auth");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const router = express.Router();
 const Product = require("../model/product");
 const Order = require("../model/order");
-const Shop = require("../model/shop");
+const lawShop = require("../model/lawshop");
 const cloudinary = require("cloudinary");
 const ErrorHandler = require("../utils/ErrorHandler");
 
@@ -13,9 +13,9 @@ router.post(
   "/create-product",
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const shopId = req.body.shopId;
-      const shop = await Shop.findById(shopId);
-      if (!shop) {
+      const lawshopId = req.body.lawshopId;
+      const lawshop = await lawShop.findById(lawshopId);
+      if (!lawshop) {
         return next(new ErrorHandler("Shop Id is invalid!", 400));
       } else {
         let images = [];
@@ -41,7 +41,7 @@ router.post(
       
         const productData = req.body;
         productData.images = imagesLinks;
-        productData.shop = shop;
+        productData.lawshop = lawshop;
 
         const product = await Product.create(productData);
 
@@ -56,12 +56,12 @@ router.post(
   })
 );
 
-// get all products of a shop
+// get all products of a lawshop
 router.get(
-  "/get-all-products-shop/:id",
+  "/get-all-products-lawshop/:id",
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const products = await Product.find({ shopId: req.params.id });
+      const products = await Product.find({ lawshopId: req.params.id });
 
       res.status(201).json({
         success: true,
@@ -73,10 +73,10 @@ router.get(
   })
 );
 
-// delete product of a shop
+// delete product of a lawshop
 router.delete(
-  "/delete-shop-product/:id",
-  isSeller,
+  "/delete-lawshop-product/:id",
+  isLawyer,
   catchAsyncErrors(async (req, res, next) => {
     try {
       const product = await Product.findById(req.params.id);

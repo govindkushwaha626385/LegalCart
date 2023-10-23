@@ -21,7 +21,7 @@ const TrackOrder = () => {
       {" "}
       <>
         {data && data?.status === "Processing" ? (
-          <h1 className="text-[20px]">Your Order is processing in shop.</h1>
+          <h1 className="text-[20px]">Your Order is processing in lawshop.</h1>
         ) : data?.status === "Transferred to delivery partner" ? (
           <h1 className="text-[20px]">
             Your Order is on the way for delivery partner.

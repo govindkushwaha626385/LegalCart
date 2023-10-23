@@ -24,24 +24,24 @@ export const getAllOrdersOfUser = (userId) => async (dispatch) => {
   }
 };
 
-// get all orders of seller
-export const getAllOrdersOfShop = (shopId) => async (dispatch) => {
+// get all orders of lawyer
+export const getAllOrdersOflawShop = (lawshopId) => async (dispatch) => {
   try {
     dispatch({
-      type: "getAllOrdersShopRequest",
+      type: "getAllOrderslawShopRequest",
     });
 
     const { data } = await axios.get(
-      `${server}/order/get-seller-all-orders/${shopId}`
+      `${server}/order/get-lawyer-all-orders/${lawshopId}`
     );
 
     dispatch({
-      type: "getAllOrdersShopSuccess",
+      type: "getAllOrderslawShopSuccess",
       payload: data.orders,
     });
   } catch (error) {
     dispatch({
-      type: "getAllOrdersShopFailed",
+      type: "getAllOrderslawShopFailed",
       payload: error.response.data.message,
     });
   }

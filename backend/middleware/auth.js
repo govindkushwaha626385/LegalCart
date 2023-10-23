@@ -2,7 +2,7 @@ const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("./catchAsyncErrors");
 const jwt = require("jsonwebtoken");
 const User = require("../model/user");
-const Shop = require("../model/shop");
+const lawShop = require("../model/lawshop");
 
 exports.isAuthenticated = catchAsyncErrors(async(req,res,next) => {
     const {token} = req.cookies;
@@ -19,15 +19,15 @@ exports.isAuthenticated = catchAsyncErrors(async(req,res,next) => {
 });
 
 
-exports.isSeller = catchAsyncErrors(async(req,res,next) => {
-    const {seller_token} = req.cookies;
-    if(!seller_token){
+exports.isLawyer = catchAsyncErrors(async(req,res,next) => {
+    const {lawyer_token} = req.cookies;
+    if(!lawyer_token){
         return next(new ErrorHandler("Please login to continue", 401));
     }
 
-    const decoded = jwt.verify(seller_token, process.env.JWT_SECRET_KEY);
+    const decoded = jwt.verify(lawyer_token, process.env.JWT_SECRET_KEY);
 
-    req.seller = await Shop.findById(decoded.id);
+    req.lawyer = await lawShop.findById(decoded.id);
 
     next();
 });

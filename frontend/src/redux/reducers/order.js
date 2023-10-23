@@ -18,15 +18,15 @@ export const orderReducer = createReducer(initialState, {
     state.error = action.payload;
   },
   
-  // get all orders of shop
-  getAllOrdersShopRequest: (state) => {
+  // get all orders of lawshop
+  getAllOrderslawShopRequest: (state) => {
     state.isLoading = true;
   },
-  getAllOrdersShopSuccess: (state, action) => {
+  getAllOrderslawShopSuccess: (state, action) => {
     state.isLoading = false;
     state.orders = action.payload;
   },
-  getAllOrdersShopFailed: (state, action) => {
+  getAllOrderslawShopFailed: (state, action) => {
     state.isLoading = false;
     state.error = action.payload;
   },

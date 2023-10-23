@@ -5,8 +5,8 @@ export const navItems = [
       url: "/",
     },
     {
-      title: "Best Selling",
-      url: "/best-selling",
+      title: "Best Lawyer",
+      url: "/best-lawyer",
     },
     {
       title: "Products",
@@ -278,9 +278,9 @@ export const navItems = [
           url: "https://www.istorebangladesh.com/images/thumbs/0000286_macbook-pro-m1_550.png",
         },
       ],
-      shop: {
+      lawshop: {
         name: "Apple inc.",
-        shop_avatar: {
+        lawshop_avatar: {
           public_id: "test",
           url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
         },
@@ -308,9 +308,9 @@ export const navItems = [
           url: "https://m.media-amazon.com/images/I/31Vle5fVdaL.jpg",
         },
       ],
-      shop: {
+      lawshop: {
         name: "Amazon Ltd",
-        shop_avatar: {
+        lawshop_avatar: {
           public_id: "test",
           url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
         },
@@ -338,9 +338,9 @@ export const navItems = [
           url: "https://www.istorebangladesh.com/images/thumbs/0000286_macbook-pro-m1_550.png",
         },
       ],
-      shop: {
+      lawshop: {
         name: "Apple inc.",
-        shop_avatar: {
+        lawshop_avatar: {
           public_id: "test",
           url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
         },
@@ -369,9 +369,9 @@ export const navItems = [
           url: "https://i0.wp.com/eccocibd.com/wp-content/uploads/2022/01/1802NL02_1.png?fit=550%2C550&ssl=1",
         },
       ],
-      shop: {
+      lawshop: {
         name: "Shahriar Watch House",
-        shop_avatar: {
+        lawshop_avatar: {
           public_id: "test",
           url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
         },
@@ -400,9 +400,9 @@ export const navItems = [
           url: "https://mirzacdns3.s3.ap-south-1.amazonaws.com/cache/catalog/RLV0015/2-800x800.jpg",
         },
       ],
-      shop: {
+      lawshop: {
         name: "Alisha Shoes Mart",
-        shop_avatar: {
+        lawshop_avatar: {
           public_id: "test",
           url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
         },
@@ -430,9 +430,9 @@ export const navItems = [
           url: "https://eratablet.com/wp-content/uploads/2022/08/H51ba6537405f4948972e293927673546u.jpg",
         },
       ],
-      shop: {
+      lawshop: {
         name: "Asus Ltd",
-        shop_avatar: {
+        lawshop_avatar: {
           public_id: "test",
           url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
         },
@@ -469,9 +469,9 @@ export const navItems = [
           url: "https://i0.wp.com/eccocibd.com/wp-content/uploads/2022/01/1802NL02_1.png?fit=550%2C550&ssl=1",
         },
       ],
-      shop: {
+      lawshop: {
         name: "Shahriar Watch House",
-        shop_avatar: {
+        lawshop_avatar: {
           public_id: "test",
           url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
         },
@@ -498,9 +498,9 @@ export const navItems = [
           url: "https://eratablet.com/wp-content/uploads/2022/08/H51ba6537405f4948972e293927673546u.jpg",
         },
       ],
-      shop: {
+      lawshop: {
         name: "Asus Ltd",
-        shop_avatar: {
+        lawshop_avatar: {
           public_id: "test",
           url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
         },
@@ -537,9 +537,9 @@ export const navItems = [
           url: "https://m.media-amazon.com/images/I/31Vle5fVdaL.jpg",
         },
       ],
-      shop: {
+      lawshop: {
         name: "Amazon Ltd",
-        shop_avatar: {
+        lawshop_avatar: {
           public_id: "test",
           url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
         },
@@ -566,9 +566,9 @@ export const navItems = [
           url: "https://eratablet.com/wp-content/uploads/2022/08/H51ba6537405f4948972e293927673546u.jpg",
         },
       ],
-      shop: {
+      lawshop: {
         name: "Asus Ltd",
-        shop_avatar: {
+        lawshop_avatar: {
           public_id: "test",
           url: "https://www.hatchwise.com/wp-content/uploads/2022/05/amazon-logo-1024x683.png",
         },

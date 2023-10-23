@@ -1,9 +1,9 @@
 const express = require("express");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const Shop = require("../model/shop");
+const lawShop = require("../model/lawshop");
 const Event = require("../model/event");
 const ErrorHandler = require("../utils/ErrorHandler");
-const { isSeller, isAdmin, isAuthenticated } = require("../middleware/auth");
+const { isLawyer, isAdmin, isAuthenticated } = require("../middleware/auth");
 const router = express.Router();
 const cloudinary = require("cloudinary");
 
@@ -12,10 +12,10 @@ router.post(
   "/create-event",
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const shopId = req.body.shopId;
-      const shop = await Shop.findById(shopId);
-      if (!shop) {
-        return next(new ErrorHandler("Shop Id is invalid!", 400));
+      const lawshopId = req.body.lawshopId;
+      const lawshop = await lawShop.findById(lawshopId);
+      if (!lawshop) {
+        return next(new ErrorHandler("lawShop Id is invalid!", 400));
       } else {
         let images = [];
 
@@ -40,7 +40,7 @@ router.post(
 
         const productData = req.body;
         productData.images = imagesLinks;
-        productData.shop = shop;
+        productData.lawshop = lawshop;
 
         const event = await Event.create(productData);
 
@@ -68,12 +68,12 @@ router.get("/get-all-events", async (req, res, next) => {
   }
 });
 
-// get all events of a shop
+// get all events of a lawshop
 router.get(
   "/get-all-events/:id",
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const events = await Event.find({ shopId: req.params.id });
+      const events = await Event.find({ lawshopId: req.params.id });
 
       res.status(201).json({
         success: true,
@@ -85,9 +85,9 @@ router.get(
   })
 );
 
-// delete event of a shop
+// delete event of a lawshop
 router.delete(
-  "/delete-shop-event/:id",
+  "/delete-lawshop-event/:id",
   catchAsyncErrors(async (req, res, next) => {
     try {
       const event = await Event.findById(req.params.id);

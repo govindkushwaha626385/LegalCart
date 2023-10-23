@@ -8,17 +8,17 @@ import { Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrdersOfAdmin } from "../../redux/actions/order";
 import Loader from "../Layout/Loader";
-import { getAllSellers } from "../../redux/actions/sellers";
+import { getAllLawyers } from "../../redux/actions/lawyers";
 
 const AdminDashboardMain = () => {
   const dispatch = useDispatch();
 
   const { adminOrders,adminOrderLoading } = useSelector((state) => state.order);
-  const { sellers } = useSelector((state) => state.seller);
+  const { lawyers } = useSelector((state) => state.lawyer);
 
   useEffect(() => {
     dispatch(getAllOrdersOfAdmin());
-    dispatch(getAllSellers());
+    dispatch(getAllLawyers());
   }, []);
 
    const adminEarning = adminOrders && adminOrders.reduce((acc,item) => acc + item.totalPrice * .10, 0);
@@ -107,12 +107,12 @@ const AdminDashboardMain = () => {
               <h3
                 className={`${styles.productTitle} !text-[18px] leading-5 !font-[400] text-[#00000085]`}
               >
-                All Sellers
+                All Lawyers
               </h3>
             </div>
-            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{sellers && sellers.length}</h5>
-            <Link to="/admin-sellers">
-              <h5 className="pt-4 pl-2 text-[#077f9c]">View Sellers</h5>
+            <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{lawyers && lawyers.length}</h5>
+            <Link to="/admin-lawyers">
+              <h5 className="pt-4 pl-2 text-[#077f9c]">View Lawyers</h5>
             </Link>
           </div>
   

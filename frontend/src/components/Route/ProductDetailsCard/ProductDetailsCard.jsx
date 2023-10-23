@@ -84,15 +84,15 @@ const ProductDetailsCard = ({ setOpen, data }) => {
               <div className="w-full 800px:w-[50%]">
                 <img src={`${data.images && data.images[0]?.url}`} alt="" />
                 <div className="flex">
-                  <Link to={`/shop/preview/${data.shop._id}`} className="flex">
+                  <Link to={`/lawshop/preview/${data.lawshop._id}`} className="flex">
                     <img
                       src={`${data.images && data.images[0]?.url}`}
                       alt=""
                       className="w-[50px] h-[50px] rounded-full mr-2"
                     />
                     <div>
-                      <h3 className={`${styles.shop_name}`}>
-                        {data.shop.name}
+                      <h3 className={`${styles.lawshop_name}`}>
+                        {data.lawshop.name}
                       </h3>
                       <h5 className="pb-3 text-[15px]">{data?.ratings} Ratings</h5>
                     </div>

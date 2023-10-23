@@ -67,7 +67,7 @@ io.on("connection", (socket) => {
     }
 
     // send the message to the recevier
-    io.to(user?.socketId).emit("getMessage", message);
+    io.to(user?.socketId).emit("getMessage", messsage);
   });
 
   socket.on("messageSeen", ({ senderId, receiverId, messageId }) => {

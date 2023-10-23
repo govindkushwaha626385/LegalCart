@@ -11,7 +11,7 @@ export const createProduct =
     originalPrice,
     discountPrice,
     stock,
-    shopId,
+    lawshopId,
     images
   ) =>
   async (dispatch) => {
@@ -29,7 +29,7 @@ export const createProduct =
         originalPrice,
         discountPrice,
         stock,
-        shopId,
+        lawshopId,
         images,
       );
       dispatch({
@@ -44,29 +44,29 @@ export const createProduct =
     }
   };
 
-// get All Products of a shop
-export const getAllProductsShop = (id) => async (dispatch) => {
+// get All Products of a lawshop
+export const getAllProductslawShop = (id) => async (dispatch) => {
   try {
     dispatch({
-      type: "getAllProductsShopRequest",
+      type: "getAllProductslawShopRequest",
     });
 
     const { data } = await axios.get(
-      `${server}/product/get-all-products-shop/${id}`
+      `${server}/product/get-all-products-lawshop/${id}`
     );
     dispatch({
-      type: "getAllProductsShopSuccess",
+      type: "getAllProductslawShopSuccess",
       payload: data.products,
     });
   } catch (error) {
     dispatch({
-      type: "getAllProductsShopFailed",
+      type: "getAllProductslawShopFailed",
       payload: error.response.data.message,
     });
   }
 };
 
-// delete product of a shop
+// delete product of a lawshop
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({
@@ -74,7 +74,7 @@ export const deleteProduct = (id) => async (dispatch) => {
     });
 
     const { data } = await axios.delete(
-      `${server}/product/delete-shop-product/${id}`,
+      `${server}/product/delete-lawshop-product/${id}`,
       {
         withCredentials: true,
       }

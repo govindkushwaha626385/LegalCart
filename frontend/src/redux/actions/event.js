@@ -21,27 +21,27 @@ export const createevent = (data) => async (dispatch) => {
   }
 };
 
-// get all events of a shop
-export const getAllEventsShop = (id) => async (dispatch) => {
+// get all events of a lawshop
+export const getAllEventslawShop = (id) => async (dispatch) => {
   try {
     dispatch({
-      type: "getAlleventsShopRequest",
+      type: "getAlleventslawShopRequest",
     });
 
     const { data } = await axios.get(`${server}/event/get-all-events/${id}`);
     dispatch({
-      type: "getAlleventsShopSuccess",
+      type: "getAlleventslawShopSuccess",
       payload: data.events,
     });
   } catch (error) {
     dispatch({
-      type: "getAlleventsShopFailed",
+      type: "getAlleventslawShopFailed",
       payload: error.response.data.message,
     });
   }
 };
 
-// delete event of a shop
+// delete event of a lawshop
 export const deleteEvent = (id) => async (dispatch) => {
   try {
     dispatch({
@@ -49,7 +49,7 @@ export const deleteEvent = (id) => async (dispatch) => {
     });
 
     const { data } = await axios.delete(
-      `${server}/event/delete-shop-event/${id}`,
+      `${server}/event/delete-lawshop-event/${id}`,
       {
         withCredentials: true,
       }

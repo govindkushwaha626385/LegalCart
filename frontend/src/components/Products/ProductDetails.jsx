@@ -7,7 +7,7 @@ import {
 } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { getAllProductsShop } from "../../redux/actions/product";
+import { getAllProductslawShop } from "../../redux/actions/product";
 import { server } from "../../server";
 import styles from "../../styles/styles";
 import {
@@ -30,7 +30,7 @@ const ProductDetails = ({ data }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllProductsShop(data && data?.shop._id));
+    dispatch(getAllProductslawShop(data && data?.lawshop._id));
     if (wishlist && wishlist.find((i) => i._id === data?._id)) {
       setClick(true);
     } else {
@@ -94,12 +94,12 @@ const ProductDetails = ({ data }) => {
     if (isAuthenticated) {
       const groupTitle = data._id + user._id;
       const userId = user._id;
-      const sellerId = data.shop._id;
+      const lawyerId = data.lawshop._id;
       await axios
         .post(`${server}/conversation/create-new-conversation`, {
           groupTitle,
           userId,
-          sellerId,
+          lawyerId,
         })
         .then((res) => {
           navigate(`/inbox?${res.data.conversation._id}`);
@@ -206,17 +206,17 @@ const ProductDetails = ({ data }) => {
                   </span>
                 </div>
                 <div className="flex items-center pt-8">
-                  <Link to={`/shop/preview/${data?.shop._id}`}>
+                  <Link to={`/lawshop/preview/${data?.lawshop._id}`}>
                     <img
-                      src={`${data?.shop?.avatar?.url}`}
+                      src={`${data?.lawshop?.avatar?.url}`}
                       alt=""
                       className="w-[50px] h-[50px] rounded-full mr-2"
                     />
                   </Link>
                   <div className="pr-8">
-                    <Link to={`/shop/preview/${data?.shop._id}`}>
-                      <h3 className={`${styles.shop_name} pb-1 pt-1`}>
-                        {data.shop.name}
+                    <Link to={`/lawshop/preview/${data?.lawshop._id}`}>
+                      <h3 className={`${styles.lawshop_name} pb-1 pt-1`}>
+                        {data.lawshop.name}
                       </h3>
                     </Link>
                     <h5 className="pb-3 text-[15px]">
@@ -293,7 +293,7 @@ const ProductDetailsInfo = ({
             }
             onClick={() => setActive(3)}
           >
-            Seller Information
+            Lawyer Information
           </h5>
           {active === 3 ? (
             <div className={`${styles.active_indicator}`} />
@@ -339,29 +339,29 @@ const ProductDetailsInfo = ({
       {active === 3 && (
         <div className="w-full block 800px:flex p-5">
           <div className="w-full 800px:w-[50%]">
-            <Link to={`/shop/preview/${data.shop._id}`}>
+            <Link to={`/lawshop/preview/${data.lawshop._id}`}>
               <div className="flex items-center">
                 <img
-                  src={`${data?.shop?.avatar?.url}`}
+                  src={`${data?.lawshop?.avatar?.url}`}
                   className="w-[50px] h-[50px] rounded-full"
                   alt=""
                 />
                 <div className="pl-3">
-                  <h3 className={`${styles.shop_name}`}>{data.shop.name}</h3>
+                  <h3 className={`${styles.lawshop_name}`}>{data.lawshop.name}</h3>
                   <h5 className="pb-2 text-[15px]">
                     ({averageRating}/5) Ratings
                   </h5>
                 </div>
               </div>
             </Link>
-            <p className="pt-2">{data.shop.description}</p>
+            <p className="pt-2">{data.lawshop.description}</p>
           </div>
           <div className="w-full 800px:w-[50%] mt-5 800px:mt-0 800px:flex flex-col items-end">
             <div className="text-left">
               <h5 className="font-[600]">
                 Joined on:{" "}
                 <span className="font-[500]">
-                  {data.shop?.createdAt?.slice(0, 10)}
+                  {data.lawshop?.createdAt?.slice(0, 10)}
                 </span>
               </h5>
               <h5 className="font-[600] pt-3">
@@ -378,7 +378,7 @@ const ProductDetailsInfo = ({
                 <div
                   className={`${styles.button} !rounded-[4px] !h-[39.5px] mt-3`}
                 >
-                  <h4 className="text-white">Visit Shop</h4>
+                  <h4 className="text-white">Visit lawShop</h4>
                 </div>
               </Link>
             </div>

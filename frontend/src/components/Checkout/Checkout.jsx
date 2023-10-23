@@ -67,11 +67,11 @@ const Checkout = () => {
     const name = couponCode;
 
     await axios.get(`${server}/coupon/get-coupon-value/${name}`).then((res) => {
-      const shopId = res.data.couponCode?.shopId;
+      const lawshopId = res.data.couponCode?.lawshopId;
       const couponCodeValue = res.data.couponCode?.value;
       if (res.data.couponCode !== null) {
         const isCouponValid =
-          cart && cart.filter((item) => item.shopId === shopId);
+          cart && cart.filter((item) => item.lawshopId === lawshopId);
 
         if (isCouponValid.length === 0) {
           toast.error("Coupon code is not valid for this shop");

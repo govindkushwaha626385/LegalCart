@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const ErrorHandler = require("../utils/ErrorHandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const { isAuthenticated, isSeller, isAdmin } = require("../middleware/auth");
+const { isAuthenticated, isLawyer, isAdmin } = require("../middleware/auth");
 const Order = require("../model/order");
-const Shop = require("../model/shop");
+const lawShop = require("../model/lawshop");
 const Product = require("../model/product");
 
 // create new order
@@ -15,20 +15,20 @@ router.post(
       const { cart, shippingAddress, user, totalPrice, paymentInfo } = req.body;
 
       //   group cart items by shopId
-      const shopItemsMap = new Map();
+      const lawshopItemsMap = new Map();
 
       for (const item of cart) {
-        const shopId = item.shopId;
-        if (!shopItemsMap.has(shopId)) {
-          shopItemsMap.set(shopId, []);
+        const lawshopId = item.lawshopId;
+        if (!lawshopItemsMap.has(lawshopId)) {
+          lawshopItemsMap.set(lawshopId, []);
         }
-        shopItemsMap.get(shopId).push(item);
+        lawshopItemsMap.get(lawshopId).push(item);
       }
 
-      // create an order for each shop
+      // create an order for each lawshop
       const orders = [];
 
-      for (const [shopId, items] of shopItemsMap) {
+      for (const [lawshopId, items] of lawshopItemsMap) {
         const order = await Order.create({
           cart: items,
           shippingAddress,
@@ -68,13 +68,13 @@ router.get(
   })
 );
 
-// get all orders of seller
+// get all orders of lawyer
 router.get(
-  "/get-seller-all-orders/:shopId",
+  "/get-lawyer-all-orders/:shopId",
   catchAsyncErrors(async (req, res, next) => {
     try {
       const orders = await Order.find({
-        "cart.shopId": req.params.shopId,
+        "cart.lawshopId": req.params.lawshopId,
       }).sort({
         createdAt: -1,
       });
@@ -89,10 +89,10 @@ router.get(
   })
 );
 
-// update order status for seller
+// update order status for lawyer
 router.put(
   "/update-order-status/:id",
-  isSeller,
+  isLawyer,
   catchAsyncErrors(async (req, res, next) => {
     try {
       const order = await Order.findById(req.params.id);
@@ -112,7 +112,7 @@ router.put(
         order.deliveredAt = Date.now();
         order.paymentInfo.status = "Succeeded";
         const serviceCharge = order.totalPrice * .10;
-        await updateSellerInfo(order.totalPrice - serviceCharge);
+        await updateLawyerInfo(order.totalPrice - serviceCharge);
       }
 
       await order.save({ validateBeforeSave: false });
@@ -131,12 +131,12 @@ router.put(
         await product.save({ validateBeforeSave: false });
       }
 
-      async function updateSellerInfo(amount) {
-        const seller = await Shop.findById(req.seller.id);
+      async function updateLawyerInfo(amount) {
+        const lawyer = await lawShop.findById(req.lawyer.id);
         
-        seller.availableBalance = amount;
+        lawyer.availableBalance = amount;
 
-        await seller.save();
+        await lawyer.save();
       }
     } catch (error) {
       return next(new ErrorHandler(error.message, 500));
@@ -170,10 +170,10 @@ router.put(
   })
 );
 
-// accept the refund ---- seller
+// accept the refund ---- lawyer
 router.put(
   "/order-refund-success/:id",
-  isSeller,
+  isLawyer,
   catchAsyncErrors(async (req, res, next) => {
     try {
       const order = await Order.findById(req.params.id);

@@ -7,7 +7,7 @@ import {
   ActivationPage,
   HomePage,
   ProductsPage,
-  BestSellingPage,
+  BestLawyerPage,
   EventsPage,
   FAQPage,
   CheckoutPage,
@@ -15,45 +15,47 @@ import {
   OrderSuccessPage,
   ProductDetailsPage,
   ProfilePage,
-  ShopCreatePage,
-  SellerActivationPage,
-  ShopLoginPage,
+  LawShopCreatePage,
+  LawyerActivationPage,
+  LawShopLoginPage,
   OrderDetailsPage,
   TrackOrderPage,
   UserInbox,
 } from "./routes/Routes.js";
+
 import {
-  ShopDashboardPage,
-  ShopCreateProduct,
-  ShopAllProducts,
-  ShopCreateEvents,
-  ShopAllEvents,
-  ShopAllCoupouns,
-  ShopPreviewPage,
-  ShopAllOrders,
-  ShopOrderDetails,
-  ShopAllRefunds,
-  ShopSettingsPage,
-  ShopWithDrawMoneyPage,
-  ShopInboxPage,
-} from "./routes/ShopRoutes";
+  LawShopDashboardPage,
+  LawShopCreateProduct,
+  LawShopAllProducts,
+  LawShopCreateEvents,
+  LawShopAllEvents,
+  LawShopAllCoupouns,
+  LawShopPreviewPage,
+  LawShopAllOrders,
+  LawShopOrderDetails,
+  LawShopAllRefunds,
+  LawShopSettingsPage,
+  LawShopWithDrawMoneyPage,
+  LawShopInboxPage,
+} from "./routes/LawShopRoutes.js";
+
 import {
   AdminDashboardPage,
   AdminDashboardUsers,
-  AdminDashboardSellers,
+  AdminDashboardLawyers,
   AdminDashboardOrders,
   AdminDashboardProducts,
   AdminDashboardEvents,
-  AdminDashboardWithdraw
+  AdminDashboardWithdraw,
 } from "./routes/AdminRoutes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Store from "./redux/store";
-import { loadSeller, loadUser } from "./redux/actions/user";
+import { loadLawyer, loadUser } from "./redux/actions/user";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import ProtectedAdminRoute from "./routes/ProtectedAdminRoute";
-import { ShopHomePage } from "./ShopRoutes.js";
-import SellerProtectedRoute from "./routes/SellerProtectedRoute";
+import { LawShopHomePage } from "./LawShopRoutes.js";
+import LawyerProtectedRoute from "./routes/LawyerProtectedRoute";
 import { getAllProducts } from "./redux/actions/product";
 import { getAllEvents } from "./redux/actions/event";
 import axios from "axios";
@@ -70,7 +72,7 @@ const App = () => {
   }
   useEffect(() => {
     Store.dispatch(loadUser());
-    Store.dispatch(loadSeller());
+    Store.dispatch(loadLawyer());
     Store.dispatch(getAllProducts());
     Store.dispatch(getAllEvents());
     getStripeApikey();
@@ -101,12 +103,12 @@ const App = () => {
           element={<ActivationPage />}
         />
         <Route
-          path="/seller/activation/:activation_token"
-          element={<SellerActivationPage />}
+          path="/lawyer/activation/:activation_token"
+          element={<LawyerActivationPage />}
         />
         <Route path="/products" element={<ProductsPage />} />
         <Route path="/product/:id" element={<ProductDetailsPage />} />
-        <Route path="/best-selling" element={<BestSellingPage />} />
+        <Route path="/best-lawyer" element={<BestLawyerPage />} />
         <Route path="/events" element={<EventsPage />} />
         <Route path="/faq" element={<FAQPage />} />
         <Route
@@ -150,113 +152,113 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="/shop/preview/:id" element={<ShopPreviewPage />} />
+        <Route path="/lawshop/preview/:id" element={<LawShopPreviewPage />} />
         {/* shop Routes */}
-        <Route path="/shop-create" element={<ShopCreatePage />} />
-        <Route path="/shop-login" element={<ShopLoginPage />} />
+        <Route path="/lawshop-create" element={<LawShopCreatePage />} />
+        <Route path="/lawshop-login" element={<LawShopLoginPage />} />
         <Route
-          path="/shop/:id"
+          path="/lawshop/:id"
           element={
-            <SellerProtectedRoute>
-              <ShopHomePage />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopHomePage />
+            </LawyerProtectedRoute>
           }
         />
         <Route
           path="/settings"
           element={
-            <SellerProtectedRoute>
-              <ShopSettingsPage />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopSettingsPage />
+            </LawyerProtectedRoute>
           }
         />
         <Route
           path="/dashboard"
           element={
-            <SellerProtectedRoute>
-              <ShopDashboardPage />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopDashboardPage />
+            </LawyerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-create-product"
           element={
-            <SellerProtectedRoute>
-              <ShopCreateProduct />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopCreateProduct />
+            </LawyerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-orders"
           element={
-            <SellerProtectedRoute>
-              <ShopAllOrders />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopAllOrders />
+            </LawyerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-refunds"
           element={
-            <SellerProtectedRoute>
-              <ShopAllRefunds />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopAllRefunds />
+            </LawyerProtectedRoute>
           }
         />
 
         <Route
           path="/order/:id"
           element={
-            <SellerProtectedRoute>
-              <ShopOrderDetails />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopOrderDetails />
+            </LawyerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-products"
           element={
-            <SellerProtectedRoute>
-              <ShopAllProducts />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopAllProducts />
+            </LawyerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-create-event"
           element={
-            <SellerProtectedRoute>
-              <ShopCreateEvents />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopCreateEvents />
+            </LawyerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-events"
           element={
-            <SellerProtectedRoute>
-              <ShopAllEvents />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopAllEvents />
+            </LawyerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-coupouns"
           element={
-            <SellerProtectedRoute>
-              <ShopAllCoupouns />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopAllCoupouns />
+            </LawyerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-withdraw-money"
           element={
-            <SellerProtectedRoute>
-              <ShopWithDrawMoneyPage />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopWithDrawMoneyPage />
+            </LawyerProtectedRoute>
           }
         />
         <Route
           path="/dashboard-messages"
           element={
-            <SellerProtectedRoute>
-              <ShopInboxPage />
-            </SellerProtectedRoute>
+            <LawyerProtectedRoute>
+              <LawShopInboxPage />
+            </LawyerProtectedRoute>
           }
         />
         {/* Admin Routes */}
@@ -280,7 +282,7 @@ const App = () => {
           path="/admin-sellers"
           element={
             <ProtectedAdminRoute>
-              <AdminDashboardSellers />
+              <AdminDashboardLawyers />
             </ProtectedAdminRoute>
           }
         />
@@ -292,7 +294,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-         <Route
+        <Route
           path="/admin-products"
           element={
             <ProtectedAdminRoute>
@@ -300,7 +302,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-         <Route
+        <Route
           path="/admin-events"
           element={
             <ProtectedAdminRoute>
@@ -308,7 +310,7 @@ const App = () => {
             </ProtectedAdminRoute>
           }
         />
-         <Route
+        <Route
           path="/admin-withdraw-request"
           element={
             <ProtectedAdminRoute>

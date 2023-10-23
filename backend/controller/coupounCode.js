@@ -1,15 +1,15 @@
 const express = require("express");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
-const Shop = require("../model/shop");
+const lawShop = require("../model/lawshop");
 const ErrorHandler = require("../utils/ErrorHandler");
-const { isSeller } = require("../middleware/auth");
+const { isLawyer } = require("../middleware/auth");
 const CoupounCode = require("../model/coupounCode");
 const router = express.Router();
 
 // create coupoun code
 router.post(
   "/create-coupon-code",
-  isSeller,
+  isLawyer,
   catchAsyncErrors(async (req, res, next) => {
     try {
       const isCoupounCodeExists = await CoupounCode.find({
@@ -32,13 +32,13 @@ router.post(
   })
 );
 
-// get all coupons of a shop
+// get all coupons of a lawshop
 router.get(
   "/get-coupon/:id",
-  isSeller,
+  isLawyer,
   catchAsyncErrors(async (req, res, next) => {
     try {
-      const couponCodes = await CoupounCode.find({ shopId: req.seller.id });
+      const couponCodes = await CoupounCode.find({ lawshopId: req.lawyer.id });
       res.status(201).json({
         success: true,
         couponCodes,
@@ -49,10 +49,10 @@ router.get(
   })
 );
 
-// delete coupoun code of a shop
+// delete coupoun code of a lawshop
 router.delete(
   "/delete-coupon/:id",
-  isSeller,
+  isLawyer,
   catchAsyncErrors(async (req, res, next) => {
     try {
       const couponCode = await CoupounCode.findByIdAndDelete(req.params.id);

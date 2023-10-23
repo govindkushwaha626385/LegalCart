@@ -278,8 +278,8 @@ const MessageList = ({
     const userId = data.members.find((user) => user !== me);
     const getUser = async () => {
       try {
-        const res = await axios.get(`${server}/shop/get-shop-info/${userId}`);
-        setUser(res.data.shop);
+        const res = await axios.get(`${server}/lawshop/get-lawshop-info/${userId}`);
+        setUser(res.data.lawshop);
       } catch (error) {
         console.log(error);
       }
@@ -380,6 +380,7 @@ const SellerInbox = ({
                 <img
                   src={`${item.images?.url}`}
                   className="w-[300px] h-[300px] object-cover rounded-[10px] ml-2 mb-2"
+                  alt=""
                 />
               )}
               {item.text !== "" && (

@@ -16,7 +16,7 @@ const coupounCodeSchema = new mongoose.Schema({
     maxAmount:{
         type: Number,
     },
-    shopId:{
+    lawshopId:{
      type: String,
      required: true,
     },

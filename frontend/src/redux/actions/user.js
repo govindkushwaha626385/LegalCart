@@ -22,22 +22,22 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 
-// load seller
-export const loadSeller = () => async (dispatch) => {
+// load lawyer
+export const loadLawyer = () => async (dispatch) => {
   try {
     dispatch({
-      type: "LoadSellerRequest",
+      type: "LoadLawyerRequest",
     });
-    const { data } = await axios.get(`${server}/shop/getSeller`, {
+    const { data } = await axios.get(`${server}/lawshop/getLawyer`, {
       withCredentials: true,
     });
     dispatch({
-      type: "LoadSellerSuccess",
-      payload: data.seller,
+      type: "LoadLawyerSuccess",
+      payload: data.lawyer,
     });
   } catch (error) {
     dispatch({
-      type: "LoadSellerFail",
+      type: "LoadLawyerFail",
       payload: error.response.data.message,
     });
   }
